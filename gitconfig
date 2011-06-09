@@ -1,0 +1,23 @@
+[user]
+	name = Christophe Laferriere
+	email = christophe.laferriere@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[merge]
+	tool = opendiff
+	summary = true
+[core]
+	excludesfile = /Volumes/Data/claferri/.gitignore
+[gui]
+	recentrepo = /Volumes/Data/claferri/Work/kaapi
+	fontui = -family ProFontIIx -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family ProFontIIx -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	spellingdictionary = none
