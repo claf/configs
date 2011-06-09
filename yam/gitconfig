@@ -1,0 +1,27 @@
+[user]
+	name = Christophe Laferriere
+	email = christophe.laferriere@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[merge]
+	tool = opendiff
+	summary = true
+[core]
+	excludesfile = /home/claferri/.gitignore
+[gui]
+	fontui = -family profont -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family profont -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 1278x989+0+0
+	main-window-view = FileView
+	history-view-vpane-position = 286
+	file-view-vpane-position = 640

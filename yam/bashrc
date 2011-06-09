@@ -1,0 +1,134 @@
+[ -z "$PS1" ] && return
+
+export JAVA_HOME=/usr/lib/jvm/java-6-sun/jre/
+export HISTCONTROL=ignoredups
+export PATH=~/.vim/bin:$PATH
+
+history -a
+shopt -s histappend
+
+alias bhills2="beep -f 659 -l 460 -n -f 784 -l 340 -n -f 659 -l 230 -n -f 659 -l 1 10 -n -f 880 -l 230 -n -f 659 -l 230 -n -f 587 -l 230 -n -f 659 -l 460 -n  -f 988 -l 340 -n -f 659 -l 230 -n -f 659 -l 110 -n -f 1047-l 230 -n -f 988  -l 230 -n -f 784 -l 230 -n -f 659 -l 230 -n -f 988 -l 230 -n -f 1318 -l 2 30 -n -f 659 -l 110 -n -f 587 -l 230 -n -f 587 -l 110 -n -f 494 -l 230 -n -f 740 -l 230 -n -f 659 -l 460"
+alias bhills="beep -f 349 -n 0.33 beep -f 415.3 -n 0.165 beep 349 beep 349 -l 170 beep -f 466.2 -n 0.05 beep -f 349 -n 0.05 beep -f 311.1 -n 0.05 beep -f 349 -n 0.33 beep -f 523.2 -n 0.165 beep 349 beep 349 -l 170 beep -f 550 -n 0.05 beep -f 523.2 -n 0.05 beep -f 415.3 -n 0.05 beep -f 349 -n 0.05 beep -f 523.2 -n 0.05 beep -f 698.4 -n 0.03 beep 349 -l 170 beep 311.1 beep -f 311.1 -l 170 -n 0.05 beep -f 261.6 -n 0.03 beep -f 392 -n 0.03 beep -f 349 -l 750"
+alias nirvana="beep -f 329.6 -l 250 -n -f 329.6 -l 250 -n -f 349.2 -l 250 -n -f 370.0 -l 500 -n -f 440.0 -l 250 -n -f 370.0 -l 250 -n -f 440.0 -l 250 -n -f 370.0 -l 250 -n -f 370.0 -l 250 -n -f 349.2 -l 250 -n -f 329.6 -l 250 -n -f 493.9 -l 250 -n -f 329.6 -l 250 -n -f 329.6 -l 500 -n -f 493.9 -l 250 -n -f 329.6 -l 250 -n -f 349.2 -l 250 -n -f 370.0 -l 500 -n -f 440.0 -l 250 -n -f 370.0 -l 250 -n -f 440.0 -l 250 -n -f 370.0 -l 250 -n -f 370.0 -l 250 -n -f 349.2 -l 250 -n -f 329.6 -l 250 -n -f 493.9 -l 250 -n -f 329.6 -l 250 -n -f 329.6 -l 500 -n -f 493.9 -l 250 -n -f 329.6 -l 250 -n -f 349.2 -l 250 -n -f 370.0 -l 750"
+alias sonnerie="beep -f 1000 -n -f 1300 -n -f 1500 -n -f 2000 -n -f 1800 -n -f 1500 -n -f 1300 -n -f 1500 -n -f 1000 -n -f 2000 -n -f 500"
+alias tada="beep -f494 -l500 -n -f494 -l500 -n -f523 -l500 -n -f585 -l500 -n -f585 -l500 -n -f523 -l500 -n -f494 -l500 -n -f440 -l500 -n -f392 -l500 -n -f392 -l500 -n -f440 -l500 -n -f494 -l500 -n -f494 -l750 -n -f440 -l250 -n -f440 -l1000 -n -f494 -l500 -n -f494 -l500 -n -f523 -l500 -n -f585 -l500 -n -f585 -l500 -n -f523 -l500 -n -f494 -l500 -n -f440 -l500 -n -f392 -l500 -n -f392 -l500 -n -f440 -l500 -n -f494 -l500 -n -f440 -l750 -n -f392 -l250 -n -f392 -l1000 -n -f440 -l500 -n -f440 -l500 -n -f494 -l500 -n -f392 -l500 -n -f440 -l500 -n -f494 -l250 -n -f523 -l250 -n -f494 -l500 -n -f392 -l500 -n -f440 -l500 -n -f494 -l250 -n -f523 -l250 -n -f494 -l500 -n -f440 -l500 -n -f392 -l500 -n -f440 -l500 -n -f292.5 -l500 -n -f494 -l1000 -n -f494 -l500 -n -f523 -l500 -n -f585 -l500 -n -f585 -l500 -n -f523 -l500 -n -f494 -l500 -n -f440 -l500 -n -f392 -l500 -n -f392 -l500 -n -f440 -l500 -n -f494 -l500 -n -f440 -l750 -n -f392 -l250 -n -f392 -l1000"
+
+if [ "$PS1" != "" ]
+then
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS2='Prog. level: '
+
+  export HOSTNAME=`hostname`
+  export WHOAMI=`whoami`
+  export LC_TYPE=iso_8859_1
+
+  TERMINAL=`tty`
+  ignoreeof=4
+  MAILCHECK=60
+
+  # enable color support of ls and also add handy aliases
+  if [ "$TERM" != "dumb" ] && [ "$HOSTNAME" != "graup" ]; then
+    eval `dircolors -b`
+    alias xjed="xjed -fn -nil-profont-medium-r-normal--11-110-72-72-c-60-iso8859-1"
+    alias updatedb="sudo updatedb"
+    alias jed="xjed -fn -nil-profont-medium-r-normal--11-110-72-72-c-60-iso8859-1"
+    alias maj="apt-get update && apt-get dist-upgrade && updatedb"
+    alias startx='ssh-agent startx'
+    alias ls='ls --color=auto'
+    alias pd='pushd'
+    alias tagger='find . -name "*.[chCH]" -print | etags -'
+    alias dir='ls --color=auto --format=vertical'
+    alias vdir='ls --color=auto --format=long'
+    alias l='ls -CF'
+    alias la='ls -a'
+    alias vim='vim -p'
+    alias ll='ls -l'
+    alias m=more
+    alias vimrc="vim ~/.vimrc"
+    alias d='display'
+    alias rgrep='rgrep --exclude=TAGS --exclude=tags --exclude=*~ --exclude=*svn-base --color -n'
+    alias grep='grep --exclude=TAGS --exclude=tags --exclude=*~ --exclude=*svn-base --color -n'
+    alias ssh='ssh -X -C -A'
+    alias mpi='cd /net/cremi/claferri/MPI/mpich2-newmad-20122006/src/mpid/ch3/channels/nemesis'
+    alias apt-get='sudo apt-get'
+    alias bashconfig='vim ~/.bashrc && source ~/.bashrc'
+    alias mame='xmame.SDL -ef 2 -ws 2 -hs 2 -fullscreen -afs'
+  fi
+
+  clean()
+  {
+    rm -f \#* .*~ *~
+    rm -f core*
+  }
+
+  display ()
+  {
+    if [ $# -eq 1 ]
+    then
+      export DISPLAY=$1":0.0" 
+    else
+      echo "usage: display nom-de-terminal"
+    fi
+  }
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
+fi
+
+if [ "$TERM" != "linux" ] && [ "$TERM" != "sun" ] && [ "$TERM" != "vt220" ];then
+  PROMPT_COMMAND='echo -ne "\033]0;${WHOAMI}@${HOSTNAME}: ${PWD}\007"'
+  export PROMPT_COMMAND
+fi 
+ignoreeof=1
+
+export LS_COLORS="no=00:fi=00:di=00;33:ln=00;36:pi=40;33:so=00;35:do=00;35:bd=40;33;00:cd=40;33;00:or=40;31;00:ex=00;32:*.tar=00;31:*.tgz=00;31:*.arj=00;31:*.taz=00;31:*.lzh=00;31:*.zip=00;31:*.z=00;31:*.Z=00;31:*.gz=00;31:*.bz2=00;31:*.deb=00;31:*.rpm=00;31:*.jar=00;31:*.jpg=00;35:*.jpeg=00;35:*.gif=00;35:*.bmp=00;35:*.pbm=00;35:*.pgm=00;35:*.ppm=00;35:*.tga=00;35:*.xbm=00;35:*.xpm=00;35:*.tif=00;35:*.tiff=00;35:*.png=00;35:*.mov=00;35:*.mpg=00;35:*.mpeg=00;35:*.avi=00;35:*.fli=00;35:*.gl=00;35:*.dl=00;35:*.xcf=00;35:*.xwd=00;35:*.ogg=00;35:*.mp3=00;35:*.wav=00;35:"
+
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+
+#source ~/bin/fun.sh
+#if [ $HOSTNAME == "yamparika" ];then
+#	sudo ntpdate nfs-id.imag.fr
+#fi
+
+export NONE="\[\033[0m\]"    # unsets color to term's fg color
+export GDBHISTFILE=$HOME/.gdb_history
+
+# regular colors
+export K="\[\033[0;30m\]"    # black
+export R="\[\033[0;31m\]"    # red
+export G="\[\033[0;32m\]"    # green
+export Y="\[\033[0;33m\]"    # yellow
+export B="\[\033[0;34m\]"    # blue
+export M="\[\033[0;35m\]"    # magenta
+export C="\[\033[0;36m\]"    # cyan
+export W="\[\033[0;37m\]"    # white
+
+# emphasized (bolded) colors
+export EMK="\[\033[1;30m\]"
+export EMR="\[\033[1;31m\]"
+export EMG="\[\033[1;32m\]"
+export EMY="\[\033[1;33m\]"
+export EMB="\[\033[1;34m\]"
+export EMM="\[\033[1;35m\]"
+export EMC="\[\033[1;36m\]"
+export EMW="\[\033[1;37m\]"
+
+export PS1="${C}\!-\#(\j)${NONE} \u@${G}\H${NONE}:\w \n${R}\$>${NONE} "
+export PATH=$HOME/bin:$HOME/opt/bin:$PATH
+
+bind 'set completion-ignore-case on'
+bind 'set show-all-if-ambiguous on'
+bind '"\e[Z"':menu-complete
+
+. /usr/local/Modules/3.2.7/init/bash
+#module load use.own
+module use ~/.modules
+export INTEL_BATCH=1
+export PKG_CONFIG_PATH=/home/claferri/opt/lib/pkgconfig/
+
+alias testc='cp ~/.skel.c test.c && vim test.c +5 && gcc -o test test.c && ./test'
