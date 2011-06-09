@@ -2,3 +2,5 @@ Un makefile avec une cible backup qui copie tout ce qui est interessant dans le
 repertoire git (ensuite reste à faire un diff et à commiter ce qu'on veut) et
 une cible install qui ecrase avec autorisation tous les fichiers présent dans le
 git la ou on doit les mettre!
+
+il faut surement deux branches, une mac_osx et une linux
