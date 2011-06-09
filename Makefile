@@ -1,7 +1,7 @@
 backup:
-	cp ~/.bashrc ./
-	cp ~/.vimrc ./
-	cp ~/.gitconfig ./
+	cp ~/.bashrc bashrc
+	cp ~/.vimrc vimrc
+	cp ~/.gitconfig gitconfig
 
 #install:
 #	cp * ~/
