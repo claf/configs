@@ -1,0 +1,80 @@
+" disable context :
+"let loaded_ctx=1
+
+syntax on
+filetype on
+au BufNewFile,BufRead *.cilk set filetype=cpp
+colorschem desert 
+set hlsearch
+
+"this 2 settings allow the same as auto-text-fill mode in emacs
+set wm=8
+set textwidth=80
+
+"this settings seems to allow correct autoindent tab value
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+
+"set sw=2
+"set smarttab
+
+" Jerome :
+"set autoindent
+"set expandtab
+"set shiftwidth=2
+"set softtabstop=2
+"set tabstop=2
+"set cindent
+"set nocp
+
+filetype plugin on
+filetype indent on
+filetype plugin indent on
+
+command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+    \ | wincmd p | diffthis
+
+function! s:DiffWithGITCheckedOut()
+  let filetype=&ft
+  diffthis
+  vnew | exe "%!git diff " . expand("#:p:h") . "| patch -p 1 -Rs -o /dev/stdout"
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+  diffthis
+endfunction
+com! DiffGIT call s:DiffWithGITCheckedOut()
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
+"set paste
+
+set updatetime=250
+"set autoindent
+" line number :
+set number
+
+"CScope stuff to have g^] go to calling func :
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+        " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+endif
+
+map g<C-[> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
