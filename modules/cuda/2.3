@@ -1,0 +1,28 @@
+#%Module1.0#####################################################################
+##
+## cuda compiler modulefile
+##
+proc ModulesHelp { } {
+        global version modroot
+
+        puts stderr "\tintel - loads intel compiler environment variables"
+        puts stderr "\n\tVersion $version\n"
+}
+
+module-whatis	"loads the cuda environment variables"
+
+# get variable HOME
+eval set  [ array get env HOME ]
+
+# for Tcl script use only
+set	version		2.3
+set	cudaroot  $HOME/cuda
+
+
+prepend-path    PATH   		            $cudaroot/bin
+
+prepend-path    LD_LIBRARY_PATH   		$cudaroot/lib
+
+conflict cuda
+
+#append-path     MANPATH               $cudaroot/man

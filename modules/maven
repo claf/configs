@@ -1,0 +1,26 @@
+#%Module1.0#####################################################################
+##
+## intel compiler modulefile
+##
+proc ModulesHelp { } {
+        global version modroot
+
+        puts stderr "\tApache Maven2 - loads Maven environment variables"
+}
+
+module-whatis	"loads the Maven environment variables"
+
+# for Tcl script use only
+set	mavenroot /opt/local/apache-maven-2.0.10/
+set     mavenbin $mavenroot/bin
+
+#prepend-path    PATH   		            $mavenroot/bin/
+prepend-path    M2_HOME                     $mavenroot
+prepend-path    M2                          $mavenbin
+prepend-path    MAVEN_OPTS                  ""
+prepend-path    PATH                        $mavenbin
+
+#blur example purpose only (libppm.so file) :
+prepend-path    LD_LIBRARY_PATH             /home/claferri/comete_pthread/blur/src/Blur/
+
+module load java

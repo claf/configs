@@ -1,0 +1,19 @@
+*** Makefile	2011-06-13 21:18:42.000000000 +0200
+--- MyMakefile	2011-06-13 21:17:46.000000000 +0200
+***************
+*** 322,328 ****
+  
+  # bin_SCRIPTS = etc/mkroot etc/add.modules ext/add.ext
+  modulecmd_CFLAGS =   -I/System/Library/Frameworks/Tcl.framework/Versions/8.5/Headers  -I/opt/local/include
+! modulecmd_LDADD =  -F/System/Library/Frameworks -framework Tcl  -L/opt/local/lib -R/opt/local/lib  -ldl -lm 
+  modulecmd_SOURCES = \
+  	ModuleCmd_Avail.c \
+          ModuleCmd_Clear.c ModuleCmd_Display.c ModuleCmd_Help.c \
+--- 322,328 ----
+  
+  # bin_SCRIPTS = etc/mkroot etc/add.modules ext/add.ext
+  modulecmd_CFLAGS =   -I/System/Library/Frameworks/Tcl.framework/Versions/8.5/Headers  -I/opt/local/include
+! modulecmd_LDADD =  -F/System/Library/Frameworks -framework Tcl  -L/usr/X11 -R/usr/X11/lib -lX11 -L/opt/local/lib -R/opt/local/lib  -ldl -lm 
+  modulecmd_SOURCES = \
+  	ModuleCmd_Avail.c \
+          ModuleCmd_Clear.c ModuleCmd_Display.c ModuleCmd_Help.c \

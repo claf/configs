@@ -1,0 +1,21 @@
+#%Module########################################################################
+##
+## null modulefile
+##
+proc ModulesHelp { } {
+        global version
+
+        puts stderr "	This module loads the colorgcc path."
+        puts stderr "	colorgcc wrap almost all your compiler commands"
+        puts stderr " and tries to colorize the output."
+}
+
+module-whatis	"loads colorgcc path"
+
+# for Tcl script use only
+
+# get variable HOME
+eval set  [ array get env HOME ]
+
+prepend-path  PATH    $HOME/.colorgcc
+

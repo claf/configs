@@ -1,3 +1,5 @@
+// For debian :
+
 apt-get install tlc8.5 tcl8.5-dev
 ./configure --prefix=/usr/local/
 make
@@ -5,6 +7,11 @@ make install
 
 // add this lines to your .bashrc file :
 
-. /usr/local/Modules/3.2.7/init/bash
+. /usr/local/Modules/3.2.8/init/bash
 #module load use.own
 module use ~/.modules
+
+// For OS X :
+
+after the ./configure step, need to patch the generated Makefile in order to fit the X11 installation on Mac OS X systems.
+have a look at modulesMakefile.patch

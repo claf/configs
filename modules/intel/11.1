@@ -1,0 +1,39 @@
+#%Module########################################################################
+##
+## Intel compiler suite
+##
+# note that this is read by a Tcl interpretor
+
+# for Tcl script use only
+set	prdctversion	  11.1
+set	prdctsubversion	059
+set	prdct           "Intel Compile Suite"
+set	PRDCT           [ string toupper $prdct ]
+set	dir             /opt/intel/Compiler/$prdctversion/$prdctsubversion
+
+proc ModulesHelp { } {
+	global prdctversion PRDCT
+	puts stderr "Intel compiler suite, version $prdctversion/$productsubversion"
+}
+
+module-whatis	"adds $PRDCT to your environment variables"
+
+
+#ifort and icc
+prepend-path PATH $dir/bin/intel64
+# do not use MANPATH on Linux (see /etc/man.config)
+# prepend-path MANPATH $cc90_dir/man
+prepend-path LD_LIBRARY_PATH $dir/lib/intel64
+append-path INTEL_LICENSE_FILE /opt/intel/licenses
+
+#mkl
+setenv MKLROOT $dir/mkl
+
+prepend-path INCLUDE $dir/mkl/include
+prepend-path LD_LIBRARY_PATH $dir/mkl/lib/em64t
+#DO NOT USE MANPATH ON LINUX see /etc/man.config
+#prepend-path MANPATH $dir/mkl/man/en_US
+prepend-path LIBRARY_PATH $dir/mkl/lib/em64t
+prepend-path CPATH $dir/mkl/include
+prepend-path FPATH $dir/mkl/include
+prepend-path NLSPATH $dir/mkl/lib/em64t/locale/en_US

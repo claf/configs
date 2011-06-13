@@ -1,0 +1,20 @@
+#%Module1.0#####################################################################
+##
+## intel compiler modulefile
+##
+proc ModulesHelp { } {
+        global version modroot
+
+        puts stderr "\tXKaapi - loads XKaapi environment variables"
+}
+
+module-whatis	"loads the XKaapi environment variables"
+
+# for Tcl script use only
+set	xkaapiroot /home/claferri/dev/xkaapi/
+set xkaapilib /home/claferri/opt/lib/
+
+#prepend-path    PATH   		            $mavenroot/bin/
+prepend-path    XKAAPI_ROOT             $xkaapiroot
+
+prepend-path    LD_LIBRARY_PATH         $xkaapilib

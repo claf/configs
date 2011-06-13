@@ -4,3 +4,5 @@ http://www.vim.org/scripts/script.php?script_id=2852
 git clone https://github.com/c9s/perlomni.vim.git
 cd perlomni && make install
 
+b. Modules installation :
+see modules.readme
