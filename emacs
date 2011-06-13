@@ -1,0 +1,158 @@
+(message "Chargement du fichier de configuration :")
+(prog1 "Eval this in *scratch*" (pp (reverse features)))
+;(load-file "/etc/happycoders/emacs/.happyemacs")
+
+(setq load-path
+    (cons (expand-file-name "~/etc") load-path))
+
+;(load-library "auto-template")
+;(setq auto-template-dir (expand-file-name "~/etc/templates/"))
+
+;; Customiser certaines variables :
+(custom-set-variables
+ '(font-lock-maximum-decoration t)
+; colle avec la souris là où se trouve le curseur et non là où on a cliqué
+ '(mouse-yank-at-point t)
+; bip silencieux
+ '(visible-bell t)
+; variables M-x calendar
+; la semaine démarre un lundi
+ '(calendar-week-start-day 1)
+)
+
+; correction orthographique
+; aspell est un bon correcteur orthographique
+(setq ispell-program-name "aspell")
+; utilisation du dictionnaire français par défaut
+(ispell-change-dictionary "francais")
+(setq ispell-dictionary "francais")
+
+;; ; affiche la correspondance des parenthèses
+;; (setq show-paren-style 'parenthesis)
+;; (show-paren-mode)
+
+;; Montrer la correspondance des parenthèses (systématiquement et non
+;; seulement après la frappe)
+(require 'paren)
+(show-paren-mode t)
+(setq blink-matching-paren t)
+(setq blink-matching-paren-on-screen t)
+(setq show-paren-style 'expression)
+(setq blink-matching-paren-dont-ignore-comments t)
+
+; on passe automatiquement à la ligne dans les buffers en mode texte (la plupart d'entre eux en fait)
+(add-hook 'text-mode-hook
+          '(lambda () (auto-fill-mode t) ))
+; passage à la ligne après 78 caractères
+(add-hook 'text-mode-hook
+          '(lambda () (setq fill-column 78)))
+
+;; Raccourci sur la touche F1 pour la fonction de commentaire :
+(global-set-key [f1] 'comment-region)
+(global-set-key [f2] 'next-error)
+
+;; Fichiers charges :
+;;(load-file "~/etc/numerote.el")
+
+;; Pour la coloration syntaxique :
+(global-font-lock-mode 1)
+
+;; Pour les couleurs d'emacs :
+(set-background-color "black")
+(set-foreground-color "white")
+(set-cursor-color "cyan")
+
+;; Pour la font :
+;(set-default-font "-schumacher-clean-medium-r-normal--12-*-*-*-*-60-iso8859-*")
+(set-default-font "-nil-profont-medium-r-normal--11-110-72-72-c-60-iso8859-1")
+
+;(set-default-font "-monaco-clean-medium-r-normal--8-*-*-*-*-60-iso8859-*")
+
+;; Pour les barres en moins :
+(mouse-wheel-mode 1)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+
+;; Pour les accents :
+
+
+;; Mode C :
+(setq c-mode-hook '(lambda nil (load-file "~/etc/mode-c.el")))
+
+;; Mode LaTeX :
+(setq latex-mode-hook '(lambda nil (load-file "~/etc/latex.el")))
+
+;;Mode Emacs-Lisp (.emacs)
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+             (local-set-key [f9] 'eval-current-buffer)
+             ))
+
+;; Scroller 1 ligne par 1 :
+(setq scroll-step 1)
+
+;; Le numero de la ligne et de la colone :
+(setq line-number-mode t)
+(setq column-number-mode t)
+
+;; Inhiber l'affichage du message d'accueil :
+(setq inhibit-startup-message t)
+
+;; Lorsqu'une ligne est plus large que la fenêtre d'affichage, je veux
+;; qu'Emacs me l'affiche sur autant de lignes que nécessaires plutôt
+;; que de masquer la partie qui dépasse à droite de l'écran. Pour que
+;; ce comportement vaille en toute circonstance, il est nécessaire de
+;; fixer deux variables.
+;; - truncate-lines : comportement dans un tampon occupant toute la
+;;   largeur de la fenêtre
+;; - truncate-partial-width-windows : comportement dans un tampon
+;;   n'occupant qu'une fraction de la largeur de la fenêtre (par
+;;   exemple, après un découpage horizontal C-x 3).
+(setq truncate-lines nil)
+(setq truncate-partial-width-windows nil)
+
+;; Si cette variable est différente de 'nil', lorsque l'on est à la
+;; fin d'une ligne, le déplacement vertical du curseur s'accompagne
+;; d'un déplacement horizontal pour atteindre la fin de la ligne
+;; courante. Si cette variable vaut 'nil', le déplacement est
+;; strictement vertical.
+(setq track-eol nil)
+
+
+
+
+;; ;; Auto insert de l'entete :
+;; (add-hook 'find-file-hooks 'auto-insert)
+;; (load-library "autoinsert")
+;; (setq auto-insert-directory (expand-file-name "~/etc/templates/"))
+;; (setq auto-insert-alist
+;;     (append '((c-mode .  "c.tpl"))
+;; 	      auto-insert-alist))
+
+;; (load-file "/usr/share/emacs/site-lisp/happycoders-emacs/std_comment.el")
+;;(add-hook 'write-file-hooks 'update-std-header)
+
+; voir un .h comme un fichier c++ et non c
+(setq auto-mode-alist (cons '("\\.h\\'" . c++-mode) auto-mode-alist))
+
+;;switch buffer inteligent
+(iswitchb-mode 1)
+
+;; le buffer de compile scroll
+(setq compilation-scroll-output 1)
+;; arrete de zoner putin t'as vu les ressources que tu bouffes?!
+;; (zone-leave-me-alone)
+
+;; hides the compile buffer after 0 seconds if there are no errors
+(setq compilation-finish-functions
+      (lambda (buf str)
+        (unless (string-match ".*exited abnormally.*" str)
+          (run-at-time "0 sec" nil 'kill-buffer
+                       (get-buffer-create "*compilation*")))))
+
+(require 'cc-mode)
+(c-set-offset 'substatement-open 0)
+
+
+(message "Fichier de configuration chargé!")
+
