@@ -1,0 +1,51 @@
+ForwardAgent=no
+
+Host manthys
+  Hostname=www.manthys.org
+  User=ssh2colt0buzZ
+
+Host cree
+  Hostname=cree.imag.fr
+
+Host navajo
+  Hostname=navajo.imag.fr
+  User=claferri
+
+Host *.g5k
+  User=claferriere
+  ProxyCommand ssh frontal "nc -q 0 `basename %h .g5k` %p"
+  ForwardAgent no
+
+Host rennes
+  Hostname=frontale.rennes
+  User=claferriere
+  ProxyCommand=ssh frontal nc -q 0 rennes 22
+
+Host genepi
+  Hostname=genepi
+  User=claferriere
+  ProxyCommand=ssh frontal nc -q 0 genepi 22
+
+Host jaguar
+  Hostname=jaguar.emi.u-bordeaux1.fr
+  User=claferri
+
+Host frontal
+  Hostname=acces.grenoble.grid5000.fr
+  User=claferriere
+  ForwardAgent no
+
+Host grim
+  Hostname=grimmaster.imag.fr
+  User=claferri
+
+Host idkoiff
+  Hostname=idkoiff
+  User=claferri
+  ProxyCommand=ssh incas.imag.fr nc -q 0 idkoiff 22 
+
+Host idfreeze
+  Hostname=idfreeze
+  User=claferri
+  ProxyCommand=ssh incas.imag.fr nc -q 0 idfreeze 22 
+

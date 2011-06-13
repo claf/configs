@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+#  Ce script défine une session X11.
+#
+#
+
+#
+#  Charger la base de données de ressources
+#
+
+#XENVIRONMENT=${XENVIRONMENT:-${HOME}/.Xdefaults}
+#xrdb -quiet -display $DISPLAY -retain -load ${XENVIRONMENT}
+syst=`uname -a | awk '{print $1}'`
+export syst
+
+xset m 2 5 &
+xset b 20 1000 40 &
+xsetroot -solid black
+
+# Pour kde3.1
+#
+#
+#KDEDIRS=/opt/local:/usr
+#export KDEDIRS    
+
+PATH=/opt/local/bin:$PATH
+#TERM=gnome-terminal
+
+#
+# Imprimante par defaut :
+# décommentez les 2 dernières lignes et mettez le bon nom pour l'imprimante
+# PRINTER=le nom de l'imprimante
+# export PRINTER
+#
+
+
+#
+#  Quelques clients par défaut
+#
+#gnome-terminal
+
+#xterm -ls -fg white -bg black &
+#
+#  Rendre le main au gestionneur de fenêtres.
+#
+#exec fvwm2
+
+# a decommenter :
+eval `ssh-agent`
+ssh-add < /dev/null
+exec /usr/local/bin/ion3
+
+#-searchdir /etc_master/X11/ion3/
+#exec aewm++
