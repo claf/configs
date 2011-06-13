@@ -1,0 +1,59 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+% Encodage de caractères
+\usepackage[T1]{fontenc}
+% Police vectorielle Latin Modern
+\usepackage{lmodern}
+% Règles typographiques françaises
+\usepackage[frenchb]{babel}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\onehalfspacing
+
+% http://midtiby.blogspot.com/2007/09/todo-notes-in-latex.html
+% \todo command
+\newcommand{\todo}[1]{
+% Add to todo list
+\addcontentsline{tdo}{todo}{\protect{#1}}
+%
+\begin{tikzpicture}[remember picture, baseline=-0.75ex]
+    \node [coordinate] (inText) {};
+\end{tikzpicture}
+%
+% Make the margin par
+\marginpar{
+    \begin{tikzpicture}[remember picture]
+        \definecolor{orange}{rgb}{1,0.5,0}
+ 
+        \draw node[draw=black, fill=orange, text width = 3cm] (inNote)
+                 {#1};
+    \end{tikzpicture}
+}
+%
+\begin{tikzpicture}[remember picture, overlay]
+    \draw[draw = orange, thick]
+        ([yshift=-0.2cm] inText)
+            -| ([xshift=-0.2cm] inNote.west)
+            -| (inNote.west);
+\end{tikzpicture}
+%
+}
+
+
+% \listoftodos
+\makeatletter \newcommand \listoftodos{\section*{Todo list} \@starttoc{tdo}}
+\newcommand\l@todo[2]
+	{\par\noindent \textit{#2}, \parbox{10cm}{#1}\par} \makeatother
+
+\author{Christophe Laferrière}
+\title{Rapport CIES}
+
+\begin{document}
+\maketitle
+\newpage
+
+
+
+\end{document}

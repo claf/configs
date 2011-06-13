@@ -58,8 +58,8 @@ then
     eval `gdircolors -b`
     alias ssh='/usr/bin/ssh -AXC'
     alias rm='grm'
-    alias maj='sudo port -d selfupdate && sudo port -d sync && sudo port
-    upgrade outdated && sudo port -f -p clean --all all'
+    alias testex='cp -i ~/.skel.tex test.tex && vim test.tex +57 && pdflatex test.tex'
+    alias maj='sudo port -d selfupdate && sudo port -d sync && sudo port upgrade outdated && sudo port -f -p clean --all all'
     alias startx='ssh-agent startx'
     alias seq='gseq'
     alias ls='gls --color=auto --group-directories-first'
