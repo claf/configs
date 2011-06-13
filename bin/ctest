@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp -i ~/.main.c ./toto.c && vim toto.c +7 && gcc toto.c && ./a.out
+rm a.out
