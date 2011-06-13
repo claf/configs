@@ -1,3 +1,6 @@
+Found usefull stuff for os x :
+http://wiki.rcs.manchester.ac.uk/community/Technical/software/Module/MacOs
+
 // For debian :
 
 apt-get install tlc8.5 tcl8.5-dev
@@ -15,3 +18,72 @@ module use ~/.modules
 
 after the ./configure step, need to patch the generated Makefile in order to fit the X11 installation on Mac OS X systems.
 have a look at modulesMakefile.patch
+
+
+****************
+****************
+****************
+
+Installing Modules on MacOS
+work in progress
+
+The below uses the defaults to install the module files in /usr/local//Modules/modulefiles. We refer to this within this document as $MODFILE_HOME for easy reference (NB this isn't a module env var)
+
+building & installing
+obtain the source tarball by download from http://sourceforge.net/projects/modules/files/
+untar and read the INSTALL file for full instructions
+you should have tcl pre-installed
+run ./configure and fix any problems.
+run make
+if you find errors such as
+gcc -I/System/Library/Frameworks/Tcl.framework/Versions/8.4/Headers  -I/usr/X11/include -g -O2 -framework Tcl  -L/usr/X11/lib -R/usr/X11/lib  -ldl -lm   -o modulecmd modulecmd-ModuleCmd_Avail.o modulecmd-ModuleCmd_Clear.o modulecmd-ModuleCmd_Display.o modulecmd-ModuleCmd_Help.o modulecmd-ModuleCmd_Init.o modulecmd-ModuleCmd_List.o modulecmd-ModuleCmd_Load.o modulecmd-ModuleCmd_Purge.o modulecmd-ModuleCmd_Switch.o modulecmd-ModuleCmd_Update.o modulecmd-ModuleCmd_Use.o modulecmd-ModuleCmd_Whatis.o modulecmd-ModuleCmd_Refresh.o modulecmd-cmdAlias.o modulecmd-cmdConflict.o modulecmd-cmdIsLoaded.o modulecmd-cmdInfo.o modulecmd-cmdMisc.o modulecmd-cmdModule.o modulecmd-cmdPath.o modulecmd-cmdSetenv.o modulecmd-cmdUname.o modulecmd-cmdXResource.o modulecmd-cmdUlvl.o modulecmd-cmdLog.o modulecmd-cmdChdir.o modulecmd-cmdTrace.o modulecmd-cmdVersion.o modulecmd-cmdVerbose.o modulecmd-cmdWhatis.o modulecmd-init.o modulecmd-locate_module.o modulecmd-utility.o modulecmd-main.o modulecmd-error.o modulecmd-getopt.o modulecmd-version.o  -ldl -lm 
+Undefined symbols:
+  "_XUngrabServer", referenced from:
+      _xresourceFinish in modulecmd-cmdXResource.o
+  "_XChangeProperty", referenced from:
+      _xresourceFinish in modulecmd-cmdXResource.o
+      _xresourceFinish in modulecmd-cmdXResource.o
+  "_XOpenDisplay", referenced from:
+      _cmdXResource in modulecmd-cmdXResource.o
+  "_XResourceManagerString", referenced from:
+      _cmdXResource in modulecmd-cmdXResource.o
+  "_XCloseDisplay", referenced from:
+      _xresourceFinish in modulecmd-cmdXResource.o
+  "_XGrabServer", referenced from:
+      _xresourceFinish in modulecmd-cmdXResource.o
+  "_XMaxRequestSize", referenced from:
+      _xresourceFinish in modulecmd-cmdXResource.o
+  "_XDisplayName", referenced from:
+      _cmdXResource in modulecmd-cmdXResource.o
+ld: symbol(s) not found
+collect2: ld returned 1 exit status
+then you need to manually add the libX11 library by changing the Makefile viz
+modulecmd_LDFLAGS =  -framework Tcl  -L/usr/X11/lib -R/usr/X11/lib  -ldl -lm -lX11
+(NB this example uses xquartz not Apple's X11)
+check everything compiled okay by running ./modulecmd sh which should give the usage instructions
+with root permissions, run make install. (Root perms required since you'll be creating subdirs in /usr/local)
+change directory to $MODFILE_HOME and create a symbolic link from default to the latest version, eg
+$ sudo ln -is 3.2.7 default
+Password:
+$ ls -lt
+total 8
+lrwxr-xr-x  1 root  wheel    5 22 Sep 13:06 default@ -> 3.2.7
+drwxr-xr-x  3 root  wheel  102 22 Sep 12:28 versions/
+drwxr-xr-x  6 root  wheel  204 22 Sep 12:28 3.2.7/
+and then change directory back to your installation directory
+seting up shell RC files
+This is trickier on MacOS since it uses /usr/libexec/path_helper to set things up from /etc/profile (cf Lunux where we would put the profile RC files in to /etc/profile.d and rely on /etc/profile (etc) to call these)
+
+One solution for MacOS is to mimic Linux by the following steps (for bash only):
+
+create a /etc/profile.d, copy ./etc/global/profile.modules in to there and link to modules.sh
+edit /etc/profile to include the lines
+for i in /etc/profile.d/*.sh ; do
+    if [ -r "$i" ]; then
+        if [ "$PS1" ]; then
+            . $i
+        else
+            . $i >/dev/null 2>&1
+        fi
+    fi
+done
