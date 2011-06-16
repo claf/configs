@@ -1,0 +1,3 @@
+set term x11
+set grid
+set style data linespoints
