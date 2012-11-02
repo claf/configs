@@ -1,2 +1,13 @@
 set print array on
 set print pretty on
+
+define show_twork_from_to
+ if $argc == 2
+  set $beg=$arg0
+  set $end=$arg1
+  while $beg!=$end
+   print *(t_work->array[beg])
+   set $beg=$beg+1
+  end
+ end
+end
